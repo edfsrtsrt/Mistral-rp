@@ -5,188 +5,614 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mistral RP • Boutique Officielle</title>
 
+  <!-- Fonts (more pro) -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
   <style>
-    :root {
-      --purple: #8b5cf6;
-      --orange: #ff7a18;
-      --bg: #0b0b12;
-      --card: rgba(255,255,255,0.08);
-      --border: rgba(255,255,255,0.15);
-      --glow: 0 0 25px rgba(139,92,246,0.45);
+    :root{
+      --purple:#8b5cf6;
+      --orange:#ff7a18;
+      --bg:#0b0b12;
+      --card:rgba(255,255,255,0.08);
+      --border:rgba(255,255,255,0.14);
+      --text:rgba(255,255,255,0.90);
+      --muted:rgba(255,255,255,0.72);
+      --glow:0 0 28px rgba(139,92,246,0.35);
     }
 
-    * { box-sizing: border-box; }
+    *{box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
 
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: radial-gradient(circle at top, #1a102b, var(--bg));
-      color: #fff;
-      overflow-x: hidden;
+    body{
+      margin:0;
+      font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:#fff;
+      background: radial-gradient(1200px 700px at 20% 0%, rgba(139,92,246,0.16), transparent 55%),
+                  radial-gradient(1200px 700px at 90% 10%, rgba(255,122,24,0.12), transparent 55%),
+                  linear-gradient(180deg, #0b0b12, #07070d);
+      overflow-x:hidden;
     }
 
-    /* Fond GTA très léger */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background: url("gta-bg.jpg") center / cover no-repeat;
-      opacity: 0.04;
-      filter: blur(2px);
-      z-index: -2;
+    /* “Image” de fond (SVG original) ultra faible opacité */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      z-index:-3;
+      opacity:0.06;
+      background-repeat:no-repeat;
+      background-position:center;
+      background-size:cover;
+      filter: blur(1px);
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1920' height='1080' viewBox='0 0 1920 1080'%3E%3Cdefs%3E%3CradialGradient id='g' cx='50%25' cy='15%25' r='85%25'%3E%3Cstop offset='0%25' stop-color='%238b5cf6' stop-opacity='.55'/%3E%3Cstop offset='55%25' stop-color='%23ff7a18' stop-opacity='.22'/%3E%3Cstop offset='100%25' stop-color='%230b0b12' stop-opacity='1'/%3E%3C/radialGradient%3E%3ClinearGradient id='n' x1='0' y1='0' x2='1' y2='0'%3E%3Cstop offset='0%25' stop-color='%238b5cf6'/%3E%3Cstop offset='100%25' stop-color='%23ff7a18'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1920' height='1080' fill='url(%23g)'/%3E%3Cpath d='M0 780 L40 780 L40 620 L95 620 L95 700 L140 700 L140 560 L210 560 L210 720 L260 720 L260 600 L320 600 L320 740 L370 740 L370 520 L440 520 L440 760 L520 760 L520 640 L590 640 L590 700 L650 700 L650 560 L720 560 L720 760 L770 760 L770 610 L845 610 L845 740 L920 740 L920 540 L1010 540 L1010 760 L1090 760 L1090 630 L1160 630 L1160 710 L1240 710 L1240 580 L1310 580 L1310 760 L1390 760 L1390 620 L1460 620 L1460 740 L1540 740 L1540 520 L1630 520 L1630 760 L1710 760 L1710 650 L1790 650 L1790 740 L1920 740 L1920 1080 L0 1080 Z' fill='%23000000' fill-opacity='.9'/%3E%3Cpath d='M120 740 L120 690 M210 720 L210 670 M320 740 L320 690 M440 760 L440 710 M770 760 L770 710 M1010 760 L1010 710 M1310 760 L1310 710 M1630 760 L1630 710' stroke='url(%23n)' stroke-opacity='.55' stroke-width='4'/%3E%3C/svg%3E");
     }
 
-    /* NAV */
-    .topnav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 50;
-      background: rgba(11,11,18,0.6);
+    /* voile sombre pour garder le contraste */
+    body::after{
+      content:"";
+      position:fixed;
+      inset:0;
+      z-index:-2;
+      background: radial-gradient(900px 500px at 50% 10%, rgba(255,255,255,0.06), transparent 60%),
+                  linear-gradient(180deg, rgba(0,0,0,0.0), rgba(0,0,0,0.35));
+      pointer-events:none;
+    }
+
+    /* Particles canvas */
+    #particles{
+      position:fixed;
+      inset:0;
+      z-index:-1;
+      pointer-events:none;
+      opacity:0.55;
+    }
+
+    /* Top nav */
+    .topnav{
+      position:fixed;
+      top:0; left:0; right:0;
+      z-index:50;
+      background: rgba(11,11,18,0.60);
+      border-bottom: 1px solid rgba(255,255,255,0.10);
       backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .nav-inner{
+      max-width:1200px;
+      margin:0 auto;
+      padding:0.95rem 1.2rem;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+    }
+    .brand{
+      font-family:'Poppins',sans-serif;
+      font-weight:700;
+      letter-spacing:0.10em;
+      text-decoration:none;
+      color:#fff;
+      white-space:nowrap;
+    }
+    .brand span{color:var(--orange);}
+
+    .links{display:flex; gap:.9rem; align-items:center; flex-wrap:wrap;}
+    .links a{
+      color:rgba(255,255,255,0.85);
+      text-decoration:none;
+      font-weight:600;
+      font-size:.95rem;
+      padding:.4rem .6rem;
+      border-radius:12px;
+      transition: background .2s ease, color .2s ease;
+    }
+    .links a:hover{background:rgba(255,255,255,0.08); color:#fff;}
+
+    .nav-cta{
+      text-decoration:none;
+      color:#fff;
+      font-weight:700;
+      padding:.58rem .95rem;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.16);
+      background: linear-gradient(135deg, rgba(139,92,246,0.22), rgba(255,122,24,0.16));
+      box-shadow: 0 0 18px rgba(139,92,246,0.18);
+      white-space:nowrap;
     }
 
-    .nav-inner {
-      max-width: 1200px;
-      margin: auto;
-      padding: 1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    @media (max-width: 860px){
+      .links{display:none;}
     }
 
-    .brand {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-decoration: none;
-      color: #fff;
+    /* Layout */
+    header{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding: 120px 1.25rem 2rem;
+      position:relative;
     }
 
-    .brand span { color: var(--orange); }
-
-    .links a {
-      margin: 0 0.6rem;
-      text-decoration: none;
-      color: rgba(255,255,255,0.85);
-      font-weight: 500;
+    .hero{
+      max-width: 900px;
     }
 
-    .links a:hover { color: #fff; }
-
-    header {
-      min-height: 100vh;
-      padding-top: 120px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-
-    h1 {
-      font-family: 'Poppins', sans-serif;
-      font-size: clamp(2.5rem, 5vw, 4rem);
+    h1{
+      font-family:'Poppins',sans-serif;
+      font-weight:700;
+      font-size: clamp(2.4rem, 5.2vw, 4rem);
+      line-height: 1.02;
+      margin: 0 0 1rem;
       text-shadow: var(--glow);
     }
+    h1 .accent{color:var(--orange);}
 
-    h1 span { color: var(--orange); }
+    .subtitle{
+      color: var(--muted);
+      max-width: 700px;
+      margin: 0 auto 1.75rem;
+      font-size: 1.05rem;
+    }
 
-    .btn {
-      display: inline-block;
-      margin-top: 2rem;
-      padding: 1rem 2.2rem;
-      border-radius: 12px;
-      text-decoration: none;
-      font-weight: 600;
-      color: #fff;
-      background: linear-gradient(135deg, var(--purple), var(--orange));
+    .cta-row{display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;}
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:.6rem;
+      padding: 0.95rem 1.35rem;
+      border-radius: 14px;
+      font-weight: 700;
+      text-decoration:none;
+      color:#fff;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: linear-gradient(135deg, rgba(139,92,246,0.95), rgba(255,122,24,0.90));
       box-shadow: var(--glow);
+      transition: transform .22s ease, box-shadow .22s ease, filter .22s ease;
+    }
+    .btn:hover{transform: translateY(-2px); box-shadow: 0 0 44px rgba(255,122,24,0.35); filter:brightness(1.05);}
+
+    .btn.secondary{
+      background: rgba(255,255,255,0.06);
+      box-shadow:none;
     }
 
-    section {
-      padding: 5rem 1.5rem;
+    .pill-row{margin-top:1.1rem; display:flex; gap:.6rem; justify-content:center; flex-wrap:wrap;}
+    .pill{
+      display:inline-flex; align-items:center; gap:.45rem;
+      padding:.42rem .65rem;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.05);
+      color: rgba(255,255,255,0.82);
+      font-weight:600;
+      font-size:.92rem;
+    }
+
+    section{
+      padding: 5rem 1.25rem;
       max-width: 1200px;
-      margin: auto;
-      scroll-margin-top: 100px;
+      margin: 0 auto;
+      scroll-margin-top: 92px;
     }
 
-    .section-title {
-      font-family: 'Poppins', sans-serif;
-      text-align: center;
+    .section-title{
+      font-family:'Poppins',sans-serif;
+      font-weight:700;
+      text-align:center;
       font-size: 2.2rem;
-      margin-bottom: 3rem;
+      margin: 0 0 2.5rem;
     }
 
-    .grid {
-      display: grid;
+    .section-sub{
+      max-width: 760px;
+      margin: -1.8rem auto 2.6rem;
+      text-align:center;
+      color: var(--muted);
+    }
+
+    .grid{
+      display:grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 2rem;
+      gap: 1.35rem;
     }
 
-    .card {
+    .card{
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 18px;
-      padding: 2rem;
+      padding: 1.6rem;
       backdrop-filter: blur(14px);
+      position:relative;
+      overflow:hidden;
+      transform: translateY(10px);
+      opacity: 0;
+      transition: transform .6s ease, opacity .6s ease;
+    }
+    .card.reveal{transform: translateY(0); opacity: 1;}
+
+    .card::after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(120deg, transparent, rgba(139,92,246,0.22), transparent);
+      opacity:0;
+      transition: opacity .35s ease;
+      pointer-events:none;
+    }
+    .card:hover::after{opacity:1;}
+
+    .card h3{
+      font-family:'Poppins',sans-serif;
+      margin:0 0 .6rem;
+      font-size: 1.1rem;
     }
 
-    footer {
-      text-align: center;
-      padding: 3rem 1rem;
-      border-top: 1px solid var(--border);
-      opacity: 0.8;
+    .muted{color: var(--muted);}
+
+    .price{
+      display:flex;
+      align-items:baseline;
+      justify-content:space-between;
+      gap:1rem;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.85);
+      font-weight:700;
+    }
+    .tag{
+      display:inline-flex; align-items:center; gap:.45rem;
+      padding:.35rem .6rem;
+      border-radius:999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.82);
+      font-size: .88rem;
+      font-weight:600;
+    }
+
+    .mini-btn{
+      display:inline-flex; align-items:center; gap:.5rem;
+      padding:.75rem 1rem;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.06);
+      color:#fff;
+      text-decoration:none;
+      font-weight:700;
+      transition: transform .18s ease, background .18s ease;
+    }
+    .mini-btn:hover{transform: translateY(-1px); background: rgba(255,255,255,0.10);}
+
+    .row{
+      display:flex;
+      justify-content:center;
+      gap:1rem;
+      flex-wrap:wrap;
+      margin-top: 1.25rem;
+    }
+
+    footer{
+      text-align:center;
+      padding: 3.2rem 1.25rem;
+      border-top: 1px solid rgba(255,255,255,0.10);
+      color: rgba(255,255,255,0.72);
+    }
+    footer a{color: rgba(139,92,246,0.95); text-decoration:none; font-weight:700;}
+
+    /* Small helpers */
+    .kicker{
+      display:inline-flex; align-items:center; gap:.5rem;
+      padding:.45rem .7rem;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.05);
+      color: rgba(255,255,255,0.82);
+      font-weight:700;
+      font-size: .9rem;
+      margin-bottom: .9rem;
     }
   </style>
 </head>
-
 <body>
 
-<nav class="topnav">
+<canvas id="particles" aria-hidden="true"></canvas>
+
+<nav class="topnav" aria-label="Navigation principale">
   <div class="nav-inner">
-    <a class="brand" href="#">MISTRAL<span>RP</span></a>
+    <a class="brand" href="#top">MISTRAL<span>RP</span></a>
     <div class="links">
-      <a href="#boutique">Boutique</a>
-      <a href="#connexion">Se connecter</a>
-      <a href="#histoire">Notre histoire</a>
-      <a href="#reglement">Règlement</a>
+      <a href="#boutique"><i class="fa-solid fa-store"></i> Boutique</a>
+      <a href="#vip"><i class="fa-solid fa-crown"></i> VIP</a>
+      <a href="#vedettes"><i class="fa-solid fa-fire"></i> Vedettes</a>
+      <a href="#connexion"><i class="fa-solid fa-plug"></i> Se connecter</a>
+      <a href="#reglement"><i class="fa-solid fa-file-lines"></i> Règlement</a>
     </div>
+    <a class="nav-cta" href="https://mistralrp.tebex.io" target="_blank" rel="noopener"><i class="fa-solid fa-cart-shopping"></i> Tebex</a>
   </div>
 </nav>
 
-<header>
-  <div>
-    <h1>MISTRAL <span>RP</span></h1>
-    <p>Serveur RolePlay néon • expérience premium • économie équilibrée</p>
-    <a class="btn" href="https://mistralrp.tebex.io" target="_blank">Accéder à la boutique</a>
+<header id="top">
+  <div class="hero">
+    <div class="kicker"><i class="fa-solid fa-bolt"></i> Neon RP • Économie équilibrée • Expérience fluide</div>
+    <h1>MISTRAL <span class="accent">RP</span></h1>
+    <p class="subtitle">Soutiens le serveur via la boutique officielle : <b>Coins</b> et <b>VIP</b> (sans pay-to-win). Tout est pensé pour garder un RP propre et une économie stable.</p>
+
+    <div class="cta-row">
+      <a class="btn" href="https://mistralrp.tebex.io" target="_blank" rel="noopener"><i class="fa-solid fa-cart-shopping"></i> Accéder à la boutique</a>
+      <a class="btn secondary" href="#vip"><i class="fa-solid fa-crown"></i> Voir les VIP</a>
+      <a class="btn secondary" href="#connexion"><i class="fa-solid fa-plug"></i> Se connecter</a>
+    </div>
+
+    <div class="pill-row">
+      <span class="pill"><i class="fa-solid fa-shield"></i> Anti pay-to-win</span>
+      <span class="pill"><i class="fa-solid fa-gauge-high"></i> Scripts optimisés</span>
+      <span class="pill"><i class="fa-solid fa-people-group"></i> Staff à l’écoute</span>
+      <span class="pill"><i class="fa-solid fa-calendar-check"></i> Events réguliers</span>
+    </div>
   </div>
 </header>
 
 <section id="boutique">
   <h2 class="section-title">Coins & VIP</h2>
+  <p class="section-sub">Deux catégories principales : des <b>Coins</b> pour les options RP / services, et des <b>VIP</b> pour la priorité, le confort et le style.</p>
+
+  <div class="grid">
+    <div class="card">
+      <span class="tag"><i class="fa-solid fa-gem"></i> Coins</span>
+      <h3>Coins • Packs</h3>
+      <p class="muted">Monnaie premium pour débloquer des options RP et services, sans casser l’économie.</p>
+      <div class="row">
+        <a class="mini-btn" href="https://mistralrp.tebex.io" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> Ouvrir Tebex</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="tag"><i class="fa-solid fa-crown"></i> VIP</span>
+      <h3>VIP • Confort & priorités</h3>
+      <p class="muted">Slots réservés, priorité de connexion, bonus qualité de vie, cosmétiques (selon grade).</p>
+      <div class="row">
+        <a class="mini-btn" href="#vip"><i class="fa-solid fa-eye"></i> Détails VIP</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="tag"><i class="fa-solid fa-scale-balanced"></i> Équilibre</span>
+      <h3>Pas de Pay-to-Win</h3>
+      <p class="muted">Chaque avantage est cadré pour préserver le fair-play et l’économie du serveur.</p>
+      <div class="row">
+        <a class="mini-btn" href="#reglement"><i class="fa-solid fa-file-lines"></i> Lire le règlement</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="vip">
+  <h2 class="section-title">VIP détaillés</h2>
+  <p class="section-sub">Exemple de paliers (tu peux me dire les vrais noms/prix/avantages et je te le mets au propre).</p>
+
+  <div class="grid">
+    <div class="card">
+      <span class="tag"><i class="fa-solid fa-star"></i> VIP Bronze</span>
+      <h3>Bronze</h3>
+      <p class="muted">Priorité légère + petit confort RP.</p>
+      <ul class="muted">
+        <li>File prioritaire (niveau 1)</li>
+        <li>Badge VIP en jeu / Discord (si tu veux)</li>
+        <li>1 bonus cosmétique léger</li>
+      </ul>
+      <div class="price"><span><i class="fa-solid fa-tag"></i> À partir de</span><span>—</span></div>
+      <div class="row">
+        <a class="mini-btn" href="https://mistralrp.tebex.io" target="_blank" rel="noopener"><i class="fa-solid fa-cart-shopping"></i> Acheter sur Tebex</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="tag"><i class="fa-solid fa-bolt"></i> VIP Silver</span>
+      <h3>Silver</h3>
+      <p class="muted">Priorité + confort + options style.</p>
+      <ul class="muted">
+        <li>File prioritaire (niveau 2)</li>
+        <li>Slot réservé</li>
+        <li>Cosmétiques / accessoires</li>
+      </ul>
+      <div class="price"><span><i class="fa-solid fa-tag"></i> À partir de</span><span>—</span></div>
+      <div class="row">
+        <a class="mini-btn" href="https://mistralrp.tebex.io" target="_blank" rel="noopener"><i class="fa-solid fa-cart-shopping"></i> Acheter sur Tebex</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="tag"><i class="fa-solid fa-crown"></i> VIP Gold</span>
+      <h3>Gold</h3>
+      <p class="muted">Le premium : priorité max + bonus QoL + style.</p>
+      <ul class="muted">
+        <li>File prioritaire (niveau 3)</li>
+        <li>Slot réservé + rejoin plus stable</li>
+        <li>Pack cosmétique premium</li>
+      </ul>
+      <div class="price"><span><i class="fa-solid fa-tag"></i> À partir de</span><span>—</span></div>
+      <div class="row">
+        <a class="mini-btn" href="https://mistralrp.tebex.io" target="_blank" rel="noopener"><i class="fa-solid fa-cart-shopping"></i> Acheter sur Tebex</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="vedettes">
+  <h2 class="section-title">Produits vedettes</h2>
+  <p class="section-sub">Mets ici tes best-sellers (Coins / VIP). Pour des liens directs, envoie-moi les URLs des produits Tebex et je te les branche.</p>
+
+  <div class="grid">
+    <div class="card">
+      <span class="tag"><i class="fa-solid fa-fire"></i> Best-seller</span>
+      <h3>Pack Coins • Starter</h3>
+      <p class="muted">Idéal pour commencer : services et options RP.</p>
+      <div class="row">
+        <a class="mini-btn" href="https://mistralrp.tebex.io" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> Voir sur Tebex</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="tag"><i class="fa-solid fa-fire"></i> Populaire</span>
+      <h3>VIP • Silver</h3>
+      <p class="muted">Priorité + slot réservé + style.</p>
+      <div class="row">
+        <a class="mini-btn" href="#vip"><i class="fa-solid fa-crown"></i> Détails VIP</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="tag"><i class="fa-solid fa-fire"></i> Value</span>
+      <h3>Pack Coins • Max</h3>
+      <p class="muted">Le pack le plus rentable pour les gros joueurs RP.</p>
+      <div class="row">
+        <a class="mini-btn" href="https://mistralrp.tebex.io" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> Voir sur Tebex</a>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section id="connexion">
   <h2 class="section-title">Se connecter</h2>
-  <a class="btn" href="https://cfx.re/join/6oxg98" target="_blank">Rejoindre le serveur</a>
-</section>
+  <p class="section-sub">Connexion rapide + liens utiles.</p>
 
-<section id="histoire">
-  <h2 class="section-title">Notre histoire</h2>
-  <p>Mistral RP est né pour proposer un RP immersif, fluide et stylé.</p>
+  <div class="grid">
+    <div class="card">
+      <span class="tag"><i class="fa-solid fa-plug"></i> FiveM</span>
+      <h3>Rejoindre le serveur</h3>
+      <p class="muted">Clique pour rejoindre directement via cfx.re</p>
+      <div class="row">
+        <a class="mini-btn" href="https://cfx.re/join/6oxg98" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> Se connecter</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="tag"><i class="fa-brands fa-discord"></i> Discord</span>
+      <h3>Rejoindre le Discord</h3>
+      <p class="muted">Infos, support, annonces, et accès à la commu.</p>
+      <div class="row">
+        <a class="mini-btn" href="https://discord.gg/mistralrp" target="_blank" rel="noopener"><i class="fa-brands fa-discord"></i> Discord</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="tag"><i class="fa-solid fa-headset"></i> Support</span>
+      <h3>Un problème ?</h3>
+      <p class="muted">Passe sur Discord et ouvre un ticket support.</p>
+      <div class="row">
+        <a class="mini-btn" href="https://discord.gg/mistralrp" target="_blank" rel="noopener"><i class="fa-solid fa-life-ring"></i> Ouvrir Discord</a>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section id="reglement">
   <h2 class="section-title">Règlement</h2>
-  <a class="btn" href="reglement.pdf" target="_blank">Lire le règlement</a>
+  <p class="section-sub">Règles essentielles pour un RP clean. (Ton PDF doit s’appeler <b>reglement.pdf</b> et être à la racine du repo.)</p>
+
+  <div class="grid">
+    <div class="card">
+      <span class="tag"><i class="fa-solid fa-file-lines"></i> PDF</span>
+      <h3>Lire le règlement</h3>
+      <p class="muted">Clique pour ouvrir le règlement officiel.</p>
+      <div class="row">
+        <a class="mini-btn" href="reglement.pdf" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> Ouvrir le PDF</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="tag"><i class="fa-solid fa-shield"></i> Points clés</span>
+      <h3>À retenir</h3>
+      <p class="muted">Respect • Fair-play • No powergaming • No HRP toxique • Valoriser les scènes RP.</p>
+    </div>
+
+    <div class="card">
+      <span class="tag"><i class="fa-solid fa-gavel"></i> Sanctions</span>
+      <h3>Application</h3>
+      <p class="muted">Sanctions progressives pour protéger l’expérience de jeu et la communauté.</p>
+    </div>
+  </div>
 </section>
 
 <footer>
-  <p>© 2025 Mistral RP</p>
-  <a href="https://discord.gg/mistralrp" target="_blank">Discord</a>
+  <p>© 2025 Mistral RP — Boutique officielle</p>
+  <p>
+    <a href="https://discord.gg/mistralrp" target="_blank" rel="noopener"><i class="fa-brands fa-discord"></i> Discord</a>
+    &nbsp;•&nbsp;
+    <a href="https://mistralrp.tebex.io" target="_blank" rel="noopener"><i class="fa-solid fa-cart-shopping"></i> Tebex</a>
+  </p>
 </footer>
+
+<script>
+  // Reveal cards on scroll
+  const observer = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (entry.isIntersecting) entry.target.classList.add('reveal');
+    }
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.card').forEach(c => observer.observe(c));
+
+  // Subtle particles (no libs)
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let w, h, dpr;
+
+  function resize(){
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = canvas.width = Math.floor(window.innerWidth * dpr);
+    h = canvas.height = Math.floor(window.innerHeight * dpr);
+    canvas.style.width = window.innerWidth + 'px';
+    canvas.style.height = window.innerHeight + 'px';
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  const rand = (a,b)=>a+Math.random()*(b-a);
+  const particles = Array.from({length: 60}, () => ({
+    x: rand(0, w), y: rand(0, h),
+    r: rand(0.8, 2.2) * dpr,
+    vx: rand(-0.15, 0.15) * dpr,
+    vy: rand(0.05, 0.25) * dpr,
+    a: rand(0.10, 0.35)
+  }));
+
+  function tick(){
+    ctx.clearRect(0,0,w,h);
+
+    // very soft glow dots
+    for (const p of particles){
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.y > h + 10) { p.y = -10; p.x = rand(0,w); }
+      if (p.x > w + 10) p.x = -10;
+      if (p.x < -10) p.x = w + 10;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(255,255,255,${p.a})`;
+      ctx.fill();
+
+      // tiny neon shimmer lines occasionally
+      if (Math.random() < 0.01) {
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(p.x + rand(-60,60)*dpr, p.y + rand(-20,40)*dpr);
+        ctx.strokeStyle = `rgba(139,92,246,${rand(0.05,0.12)})`;
+        ctx.lineWidth = 1 * dpr;
+        ctx.stroke();
+      }
+    }
+
+    requestAnimationFrame(tick);
+  }
+  tick();
+</script>
 
 </body>
 </html>
