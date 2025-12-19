@@ -36,18 +36,17 @@
       overflow-x:hidden;
     }
 
-    /* “Image” de fond (SVG original) ultra faible opacité */
-    body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      z-index:-3;
-      opacity:0.14;
-      background-repeat:no-repeat;
-      background-position:center;
-      background-size:cover;
-      filter: blur(1px);
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1920' height='1080' viewBox='0 0 1920 1080'%3E%3Cdefs%3E%3CradialGradient id='g' cx='50%25' cy='15%25' r='85%25'%3E%3Cstop offset='0%25' stop-color='%238b5cf6' stop-opacity='.55'/%3E%3Cstop offset='55%25' stop-color='%23ff7a18' stop-opacity='.22'/%3E%3Cstop offset='100%25' stop-color='%230b0b12' stop-opacity='1'/%3E%3C/radialGradient%3E%3ClinearGradient id='n' x1='0' y1='0' x2='1' y2='0'%3E%3Cstop offset='0%25' stop-color='%238b5cf6'/%3E%3Cstop offset='100%25' stop-color='%23ff7a18'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1920' height='1080' fill='url(%23g)'/%3E%3Cpath d='M0 780 L40 780 L40 620 L95 620 L95 700 L140 700 L140 560 L210 560 L210 720 L260 720 L260 600 L320 600 L320 740 L370 740 L370 520 L440 520 L440 760 L520 760 L520 640 L590 640 L590 700 L650 700 L650 560 L720 560 L720 760 L770 760 L770 610 L845 610 L845 740 L920 740 L920 540 L1010 540 L1010 760 L1090 760 L1090 630 L1160 630 L1160 710 L1240 710 L1240 580 L1310 580 L1310 760 L1390 760 L1390 620 L1460 620 L1460 740 L1540 740 L1540 520 L1630 520 L1630 760 L1710 760 L1710 650 L1790 650 L1790 740 L1920 740 L1920 1080 L0 1080 Z' fill='%23000000' fill-opacity='.9'/%3E%3Cpath d='M120 740 L120 690 M210 720 L210 670 M320 740 L320 690 M440 760 L440 710 M770 760 L770 710 M1010 760 L1010 710 M1310 760 L1310 710 M1630 760 L1630 710' stroke='url(%23n)' stroke-opacity='.55' stroke-width='4'/%3E%3C/svg%3E");
+    /* Vidéo de fond (remplace l'image) */
+    .bg-video{
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -3;
+      opacity: 0.12; /* opacité basse */
+      filter: blur(2px) saturate(1.1);
+      pointer-events: none;
     }
 
     /* voile sombre pour garder le contraste */
@@ -319,6 +318,12 @@
   </style>
 </head>
 <body>
+
+<video class="bg-video" autoplay muted loop playsinline>
+  <!-- IMPORTANT : YouTube ne peut pas être utilisé directement en fond -->
+  <!-- Télécharge la vidéo YouTube et place-la ici en MP4 -->
+  <source src="background.mp4" type="video/mp4">
+</video>
 
 <canvas id="particles" aria-hidden="true"></canvas>
 
