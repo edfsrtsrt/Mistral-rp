@@ -24,6 +24,69 @@
       overflow-x: hidden;
     }
 
+    /* Top nav */
+    .topnav{
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      background: rgba(11,11,18,0.55);
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+      backdrop-filter: blur(14px);
+    }
+    .nav-inner{
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0.9rem 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .brand{
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 800;
+      text-shadow: var(--glow);
+      white-space: nowrap;
+    }
+    .brand span{ color: var(--orange); }
+    .links{
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .links a{
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 0.35rem 0.55rem;
+      border-radius: 10px;
+      transition: background .25s ease, color .25s ease;
+    }
+    .links a:hover{
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+    }
+    .nav-cta{
+      text-decoration: none;
+      color: #fff;
+      font-weight: 800;
+      padding: 0.55rem 0.9rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: linear-gradient(135deg, rgba(139,92,246,0.25), rgba(255,122,24,0.18));
+      box-shadow: 0 0 18px rgba(139,92,246,0.25);
+      white-space: nowrap;
+    }
+    @media (max-width: 820px){
+      .links{ display:none; }
+    }
+
     header {
       min-height: 100vh;
       display: flex;
@@ -32,6 +95,7 @@
       text-align: center;
       padding: 2rem;
       position: relative;
+      padding-top: 90px; /* pour laisser la place à la nav */
     }
 
     header::before {
@@ -79,6 +143,7 @@
       padding: 5rem 1.5rem;
       max-width: 1200px;
       margin: auto;
+      scroll-margin-top: 92px; /* offset ancres */
     }
 
     .section-title {
@@ -133,16 +198,29 @@
 </head>
 <body>
 
-<header>
+<nav class="topnav" aria-label="Navigation principale">
+  <div class="nav-inner">
+    <a class="brand" href="#top">MISTRAL<span>RP</span></a>
+    <div class="links">
+      <a href="#boutique">Boutique</a>
+      <a href="#connexion">Se connecter</a>
+      <a href="#histoire">Notre histoire</a>
+      <a href="#reglement">Règlement</a>
+    </div>
+    <a class="nav-cta" href="https://mistralrp.tebex.io" target="_blank" rel="noopener">Tebex</a>
+  </div>
+</nav>
+
+<header id="top">
   <div>
     <h1>MISTRAL <span>RP</span></h1>
     <p class="subtitle">Serveur RolePlay néon • expérience premium • économie équilibrée.
       Soutiens le serveur et débloque des avantages RP exclusifs via notre boutique officielle.</p>
-    <a class="btn" href="https://mistralrp.tebex.io" target="_blank">Accéder à la boutique Tebex</a>
+    <a class="btn" href="https://mistralrp.tebex.io" target="_blank" rel="noopener">Accéder à la boutique Tebex</a>
   </div>
 </header>
 
-<section>
+<section id="boutique">
   <h2 class="section-title">Coins & VIP</h2>
   <div class="grid">
     <div class="card">
@@ -170,9 +248,57 @@
   </div>
 </section>
 
+<section id="connexion">
+  <h2 class="section-title">Se connecter</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>⚡ Connexion FiveM</h3>
+      <p>Ouvre FiveM, puis clique sur le bouton ci-dessous (ou colle le lien dans ton navigateur).</p>
+      <p><a class="btn" href="https://cfx.re/join/6oxg98" target="_blank" rel="noopener">Rejoindre Mistral RP</a></p>
+    </div>
+    <div class="card">
+      <h3>💬 Discord</h3>
+      <p>Infos, annonces, support et whitelist (si applicable).</p>
+      <p><a class="btn" href="https://discord.gg/mistralrp" target="_blank" rel="noopener">Rejoindre le Discord</a></p>
+    </div>
+    <div class="card">
+      <h3>🧩 Prérequis</h3>
+      <p>FiveM à jour • GTA V installé • micro recommandé • respect du règlement.</p>
+    </div>
+  </div>
+</section>
+
+<section id="histoire">
+  <h2 class="section-title">Notre histoire</h2>
+  <div class="card">
+    <h3>🌪️ L’esprit Mistral</h3>
+    <p>Mistral RP est né d’une idée simple : un RP immersif, fluide et stylé, avec une économie équilibrée et une vraie place pour les entreprises, l’illégal et les scènes de vie.</p>
+    <p>Notre objectif : des scripts optimisés, une ambiance néon unique et une communauté qui privilégie la qualité du jeu plutôt que la quantité.</p>
+  </div>
+</section>
+
+<section id="reglement">
+  <h2 class="section-title">Règlement</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>📄 Lire le règlement</h3>
+      <p>Le respect des règles garantit un RP propre et plaisant pour tout le monde.</p>
+      <p><a class="btn" href="reglement.pdf" target="_blank" rel="noopener">Ouvrir le PDF</a></p>
+    </div>
+    <div class="card">
+      <h3>✅ Points clés</h3>
+      <p>Respect • Fair-play • No powergaming • No HRP toxique • Valoriser les scènes RP.</p>
+    </div>
+    <div class="card">
+      <h3>🛡️ Sanctions</h3>
+      <p>Les sanctions sont progressives et appliquées pour protéger l’expérience de jeu et la communauté.</p>
+    </div>
+  </div>
+</section>
+
 <footer>
   <p>© 2025 Mistral RP — Boutique officielle</p>
-  <p><a href="https://discord.gg/mistralrp" target="_blank">Discord</a> • <a href="https://mistralrp.tebex.io" target="_blank">Tebex</a></p>
+  <p><a href="https://discord.gg/mistralrp" target="_blank" rel="noopener">Discord</a> • <a href="https://mistralrp.tebex.io" target="_blank" rel="noopener">Tebex</a></p>
 </footer>
 
 </body>
