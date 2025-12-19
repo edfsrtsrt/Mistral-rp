@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mistral RP • Boutique Officielle</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --purple: #8b5cf6;
+      --orange: #ff7a18;
+      --bg: #0b0b12;
+      --card: rgba(255,255,255,0.08);
+      --border: rgba(255,255,255,0.15);
+      --glow: 0 0 25px rgba(139,92,246,0.45);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at top, #1a102b, var(--bg));
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    header {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      position: relative;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, rgba(139,92,246,0.15), rgba(255,122,24,0.1));
+      filter: blur(80px);
+      z-index: -1;
+    }
+
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      text-shadow: var(--glow);
+    }
+
+    h1 span { color: var(--orange); }
+
+    .subtitle {
+      max-width: 650px;
+      margin: 1.2rem auto 2rem;
+      opacity: 0.9;
+      font-size: 1.05rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 1rem 2.2rem;
+      border-radius: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      color: #fff;
+      background: linear-gradient(135deg, var(--purple), var(--orange));
+      box-shadow: var(--glow);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 0 40px rgba(255,122,24,0.6);
+    }
+
+    section {
+      padding: 5rem 1.5rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section-title {
+      font-family: 'Orbitron', sans-serif;
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 3rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 2rem;
+      backdrop-filter: blur(14px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent, rgba(139,92,246,0.25), transparent);
+      opacity: 0;
+      transition: opacity .4s;
+    }
+
+    .card:hover::after { opacity: 1; }
+
+    .card h3 {
+      font-family: 'Orbitron', sans-serif;
+      margin-top: 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 3rem 1rem;
+      border-top: 1px solid var(--border);
+      opacity: 0.8;
+      font-size: 0.9rem;
+    }
+
+    footer a { color: var(--purple); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>MISTRAL <span>RP</span></h1>
+    <p class="subtitle">Serveur RolePlay néon • expérience premium • économie équilibrée.
+      Soutiens le serveur et débloque des avantages RP exclusifs via notre boutique officielle.</p>
+    <a class="btn" href="https://mistralrp.tebex.io" target="_blank">Accéder à la boutique Tebex</a>
+  </div>
+</header>
+
+<section>
+  <h2 class="section-title">Coins & VIP</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>💠 Coins</h3>
+      <p>Monnaie premium utilisable en jeu pour débloquer des options RP, véhicules lore-friendly et services spéciaux.</p>
+    </div>
+    <div class="card">
+      <h3>👑 VIP</h3>
+      <p>Accès prioritaire, slots réservés, cosmétiques exclusifs et avantages RP sans pay-to-win.</p>
+    </div>
+    <div class="card">
+      <h3>⚖️ Équilibré</h3>
+      <p>Chaque achat respecte l'équilibre RP. Aucun avantage ne casse l'économie ou le fair-play.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Pourquoi nous soutenir ?</h2>
+  <div class="grid">
+    <div class="card"><p>💻 Serveur stable & scripts optimisés</p></div>
+    <div class="card"><p>🎭 RP sérieux & immersif</p></div>
+    <div class="card"><p>🛠️ Développement actif & mises à jour régulières</p></div>
+    <div class="card"><p>🤝 Staff présent et à l'écoute</p></div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Mistral RP — Boutique officielle</p>
+  <p><a href="https://discord.gg/mistralrp" target="_blank">Discord</a> • <a href="https://mistralrp.tebex.io" target="_blank">Tebex</a></p>
+</footer>
+
+</body>
+</html>
